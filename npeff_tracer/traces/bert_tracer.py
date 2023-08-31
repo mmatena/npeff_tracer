@@ -258,7 +258,7 @@ class BertTracer:
         bert_state = self.graph.bert_state
         tokens = [
             self.tokenizer.convert_ids_to_tokens(int(token_id.numpy()))
-            for token_id in bert_state.inputs['input_ids'][0]
+            for token_id in tf.squeeze(bert_state.inputs['input_ids'], axis=0)
         ]
 
         return BertTrace(
