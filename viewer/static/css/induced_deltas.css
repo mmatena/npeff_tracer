@@ -1,0 +1,54 @@
+* {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+
+#negative-log-threshold {
+    margin: 0.4rem;
+    width: 500px;
+}
+
+
+svg.induced-deltas-viewer {
+    margin: 25px;
+}
+
+
+.token-container-rect {
+    stroke: black;
+    stroke-width: 1px;
+    fill: #f2f1f1;
+}
+
+.token-container-text, .layers-token-container-text {
+    font-family: monospace;
+    font-size: 11px;
+
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.layers-token-container-rect {
+    stroke: black;
+    stroke-width: 1px;
+    fill: #f2f1f1;
+}
+
+
+.attention-layer-path, .ffw-layer-path {
+    fill: transparent;
+    stroke-width: 1.5px;
+}
+
+.transformed-mask-path {
+    stroke: #8e9db9;
+}
+
+.induced-mask-path {
+    stroke: #b5193b;
+}
+
+.residual-mask-path {
+    stroke: #3bc318;
+}
