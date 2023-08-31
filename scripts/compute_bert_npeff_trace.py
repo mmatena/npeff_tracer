@@ -8,6 +8,8 @@ task). The second column can be left empty to signify a single segment if using 
 A separate output file will be created for each example. If there is more than one example, each
 file will have a "-example{index}" suffix appended to it.
 """
+from npeff_tracer.util import vat_da_faak_huggingface
+
 import csv
 import os
 

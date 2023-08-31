@@ -203,17 +203,17 @@ class BertTracer:
         self.reset()
         self.graph.mask_all_of_type('induced')
 
-        # NOTE: The reverse topological sort not really needed here.
-        nodes = self.graph.get_reverse_topologically_sorted_nodes()
+        nodes = list(self.graph.full_nodes)
+        nodes.sort(reverse=True)
 
         edge_to_dps = {}
 
         for node in tqdm(nodes) if self.use_tqdm else nodes:
-            for parent in list(self.graph.parents['induced'][node]):
+            for parent in list(self.graph.full_parents['induced'][node]):
                 self.graph.add_edge(parent, node, 'induced')
                 dps = self.masked_evaluator.compute_total_pooler_fisher_dot_products_masked()
                 self.graph.remove_edge(parent, node, 'induced')
-                edge_to_dps[(parent, node, 'induced')] = dps
+                edge_to_dps[(parent, node, 'induced')] = dps.numpy()
 
         return edge_to_dps
 
@@ -240,7 +240,7 @@ class BertTracer:
         for edge in tqdm(subtree_edges) if self.use_tqdm else subtree_edges:
             self.graph.remove_edge(*edge)
             trial_fisher_dps = self.masked_evaluator.compute_total_pooler_fisher_dot_products_masked()
-            edge_to_delta[edge] = trial_fisher_dps - base_fisher_dps
+            edge_to_delta[edge] = (trial_fisher_dps - base_fisher_dps).numpy()
             self.graph.add_edge(*edge)
 
         return edge_to_delta

@@ -15,10 +15,6 @@ let active_induced_deltas_data;
 function on_edge_click(d, i) {
     if(!subtree_deltas.root_to_subtree_delta_mags[d.edge_str_key]) { return; }
 
-    const induced_contribution = d.delta.map(x => -x);
-    console.log(induced_contribution);
-
-
     induced_deltas_data = subtree_deltas.get_delta_mags_for_root_edge(JSON.parse(d.edge_str_key));
 
     active_induced_deltas_data = induced_deltas_data.clone();
@@ -47,18 +43,18 @@ function run(response) {
     viewer.initial_render();
     viewer.render_edges();
 
+    active_induced_deltas_data = induced_deltas_data.clone();
+    viewer.set_edges_data(active_induced_deltas_data);
+    viewer.render_edges();
+    
+    viewer.svg.on('dblclick', render_all_induced_onlys);
+}
+
+
+function render_all_induced_onlys() {
+    induced_deltas_data = subtree_deltas.induced_delta_mags;
 
     active_induced_deltas_data = induced_deltas_data.clone();
     viewer.set_edges_data(active_induced_deltas_data);
     viewer.render_edges();
-
 }
-
-
-// function render_all_induced_onlys() {
-//     induced_deltas_data = subtree_deltas.induced_delta_mags;
-
-//     active_induced_deltas_data = induced_deltas_data.clone();
-//     viewer.set_edges_data(active_induced_deltas_data);
-//     viewer.render_edges();
-// }

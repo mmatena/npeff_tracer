@@ -1,4 +1,5 @@
 """Server for the NPEFF trace viewer."""
+from npeff_tracer.util import vat_da_faak_huggingface
 
 import collections
 import os

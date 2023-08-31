@@ -163,9 +163,6 @@ class SubtreeDeltas {
 
         const induced_delta_mags = EdgeDeltaMagnitudes.from_edge_deltas_list(induced_deltas, magnitude_fn);
 
-        // // These should all be induced edges.
-        // const subtree_root_edges = subtree_deltas.map(x => x.key);
-
         // Map from stringfied root edge to EdgeDeltaMagnitudes.
         const root_to_subtree_delta_mags = {};
         for (const {key, value} of subtree_deltas) {
